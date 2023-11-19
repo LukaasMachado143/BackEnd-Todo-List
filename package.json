@@ -4,7 +4,8 @@
   "description": "Back-end para um site de lista de tarefas",
   "main": "server.ts",
   "scripts": {
-    "start:dev": "tsx watch src/server.ts"
+    "start:dev": "tsx watch src/server.ts",
+    "build": "tsup src"
   },
   "author": "Lucas Fernando",
   "license": "ISC",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "fastify": "^4.24.3",
-    "firebase-admin": "^11.11.0"
+    "firebase-admin": "^11.11.0",
+    "zod": "^3.22.4"
   }
 }
