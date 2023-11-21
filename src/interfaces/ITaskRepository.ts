@@ -1,4 +1,4 @@
-import { TaskModel } from "../models/TaskModel";
+
 import { TaskResponseDTO } from "../types/TaskResponseDTO";
 
 export interface ITaskRepository {

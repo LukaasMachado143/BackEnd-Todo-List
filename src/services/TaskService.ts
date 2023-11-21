@@ -12,8 +12,9 @@ export class TaskService implements ITaksService {
   constructor() {
     this._repository = new TaskRepository();
   }
-  async getAll(): Promise<Response> {
+  public async getAll(): Promise<Response> {
     const taskList: TaskResponseDTO[] = await this._repository.getAll();
+    console.log(taskList);
     const response: Response = {
       success: true,
       message: "ok",
@@ -21,7 +22,7 @@ export class TaskService implements ITaksService {
     };
     return response;
   }
-  async getById(id: string): Promise<Response> {
+  public async getById(id: string): Promise<Response> {
     const task: TaskResponseDTO = await this._repository.getById(id);
     const response: Response = {
       success: true,
@@ -30,7 +31,7 @@ export class TaskService implements ITaksService {
     };
     return response;
   }
-  async create(data: TaskCreateDTO): Promise<Response> {
+  public async create(data: TaskCreateDTO): Promise<Response> {
     const { title, description }: TaskCreateDTO = data;
     const newTask: TaskModel = new TaskModel(title, description);
     const createdTask: TaskResponseDTO = await this._repository.create(newTask);
@@ -41,7 +42,7 @@ export class TaskService implements ITaksService {
     };
     return response;
   }
-  async delete(id: string): Promise<Response> {
+  public async delete(id: string): Promise<Response> {
     const deteledTask: TaskResponseDTO = await this._repository.detele(id);
     const response: Response = {
       success: true,
@@ -50,7 +51,7 @@ export class TaskService implements ITaksService {
     };
     return response;
   }
-  async updatePartial(data: TaskRequestDTO): Promise<Response> {
+  public async updatePartial(data: TaskRequestDTO): Promise<Response> {
     const updatedTask: TaskResponseDTO = await this._repository.update(data);
     const response: Response = {
       success: true,

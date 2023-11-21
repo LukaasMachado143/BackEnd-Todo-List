@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { ITaksService } from "../interfaces/ITaskService";
-import { TaskService } from "../services/TaskService";
 import { Response } from "../types/GeneralResponse";
 import { TaskRequestDTO } from "../types/TaskRequestDTO";
 import { TaskCreateDTO } from "../types/TaskCreateDTO";
+import { TaskService } from "../services/TaskService";
 
 export class TaskController {
   private _service: ITaksService;
@@ -15,6 +15,7 @@ export class TaskController {
       const response: Response = await this._service.getAll();
       reply.send(response);
     } catch (error) {
+      console.log(error);
       const errorMessage: Response = {
         success: false,
         message: "Internal Error",
