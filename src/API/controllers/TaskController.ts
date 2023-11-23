@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { ITaksService } from "../interfaces/ITaskService";
-import { Response } from "../types/GeneralResponse";
-import { TaskRequestDTO } from "../types/Task/TaskRequestDTO";
-import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
-import { TaskService } from "../services/TaskService";
+import { ITaksService } from "../../Core/interfaces/ITaskService";
+import { TaskService } from "../../BusinessLogic/TaskService";
+import { TaskRequestDTO } from "../../Core/types/Task/TaskRequestDTO";
+import { TaskCreateDTO } from "../../Core/types/Task/TaskCreateDTO";
+import { Response } from "../../Core/types/GeneralResponse";
 
 export class TaskController {
   async getAll(request: FastifyRequest, reply: FastifyReply) {

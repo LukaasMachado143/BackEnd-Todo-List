@@ -1,7 +1,7 @@
-import { ITaskRepository } from "../interfaces/ITaskRepository";
-import { TaskResponseDTO } from "../types/Task/TaskResponseDTO";
+import { ITaskRepository } from "../../Core/interfaces/ITaskRepository";
+import { TaskCreateDTO } from "../../Core/types/Task/TaskCreateDTO";
+import { TaskResponseDTO } from "../../Core/types/Task/TaskResponseDTO";
 import { prismaClient } from "../db/db";
-import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
 
 export class TaskRepository implements ITaskRepository {
   public async getAll(): Promise<TaskResponseDTO[]> {
@@ -42,9 +42,9 @@ export class TaskRepository implements ITaskRepository {
       },
       data: {
         title: data.title,
-        description:data.description,
+        description: data.description,
         isConclued: data.isConclued,
-        updateAt: data.updateAt
+        updateAt: data.updateAt,
       },
     });
     const response: TaskResponseDTO = {

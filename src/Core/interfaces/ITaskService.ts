@@ -1,6 +1,6 @@
-import { Response } from "../types/GeneralResponse";
 import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
 import { TaskRequestDTO } from "../types/Task/TaskRequestDTO";
+import { Response } from "../types/GeneralResponse";
 
 export interface ITaksService {
   getAll(): Promise<Response>;

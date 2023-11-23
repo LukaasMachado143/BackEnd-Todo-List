@@ -1,5 +1,5 @@
 import fastify, { FastifyInstance } from "fastify";
-import { taskRoutes } from "./routes/TaskRoutes";
+import { taskRoutes } from "./API/routes/TaskRoutes";
 import fastifyCors from "@fastify/cors";
 
 const server: FastifyInstance = fastify();

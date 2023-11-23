@@ -1,10 +1,10 @@
-import { ITaskRepository } from "../interfaces/ITaskRepository";
-import { ITaksService } from "../interfaces/ITaskService";
-import { TaskRepository } from "../repositories/TaskRespository";
-import { Response } from "../types/GeneralResponse";
-import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
-import { TaskRequestDTO } from "../types/Task/TaskRequestDTO";
-import { TaskResponseDTO } from "../types/Task/TaskResponseDTO";
+import { ITaskRepository } from "../Core/interfaces/ITaskRepository";
+import { ITaksService } from "../Core/interfaces/ITaskService";
+import { TaskResponseDTO } from "../Core/types/Task/TaskResponseDTO";
+import { TaskRepository } from "../Infrastructure/repositories/TaskRespository";
+import { Response } from "../Core/types/GeneralResponse";
+import { TaskCreateDTO } from "../Core/types/Task/TaskCreateDTO";
+import { TaskRequestDTO } from "../Core/types/Task/TaskRequestDTO";
 
 export class TaskService implements ITaksService {
   private _repository: ITaskRepository = new TaskRepository();
