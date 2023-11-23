@@ -1,20 +1,15 @@
 import { ITaskRepository } from "../interfaces/ITaskRepository";
 import { ITaksService } from "../interfaces/ITaskService";
-import { TaskModel } from "../models/TaskModel";
 import { TaskRepository } from "../repositories/TaskRespository";
 import { Response } from "../types/GeneralResponse";
-import { TaskCreateDTO } from "../types/TaskCreateDTO";
-import { TaskRequestDTO } from "../types/TaskRequestDTO";
-import { TaskResponseDTO } from "../types/TaskResponseDTO";
+import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
+import { TaskRequestDTO } from "../types/Task/TaskRequestDTO";
+import { TaskResponseDTO } from "../types/Task/TaskResponseDTO";
 
 export class TaskService implements ITaksService {
-  private _repository: ITaskRepository;
-  constructor() {
-    this._repository = new TaskRepository();
-  }
+  private _repository: ITaskRepository = new TaskRepository();
   public async getAll(): Promise<Response> {
     const taskList: TaskResponseDTO[] = await this._repository.getAll();
-    console.log(taskList);
     const response: Response = {
       success: true,
       message: "ok",
@@ -33,8 +28,10 @@ export class TaskService implements ITaksService {
   }
   public async create(data: TaskCreateDTO): Promise<Response> {
     const { title, description }: TaskCreateDTO = data;
-    const newTask: TaskModel = new TaskModel(title, description);
-    const createdTask: TaskResponseDTO = await this._repository.create(newTask);
+    const createdTask: TaskResponseDTO = await this._repository.create({
+      title,
+      description,
+    });
     const response: Response = {
       success: true,
       message: "Create Successfully",

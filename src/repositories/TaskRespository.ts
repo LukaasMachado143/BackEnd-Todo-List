@@ -1,31 +1,67 @@
 import { ITaskRepository } from "../interfaces/ITaskRepository";
-import { TaskResponseDTO } from "../types/TaskResponseDTO";
-import { Firestore } from "@google-cloud/firestore";
+import { TaskResponseDTO } from "../types/Task/TaskResponseDTO";
+import { prismaClient } from "../db/db";
+import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
 
 export class TaskRepository implements ITaskRepository {
-  private _context: Firestore;
-  constructor() {
-    this._context = new Firestore();
-  }
   public async getAll(): Promise<TaskResponseDTO[]> {
-    const data = await this._context.collection("tasks").get();
-    console.log(data);
-    const tasks: TaskResponseDTO[] = data.docs.map(
-      (doc) => doc.data() as TaskResponseDTO
+    const listTask = await prismaClient.task.findMany();
+    const listTaskFormated: TaskResponseDTO[] = listTask.map(
+      (task) => task as TaskResponseDTO
     );
-    console.log(tasks);
-    return tasks;
+    return listTaskFormated;
   }
   public async getById(id: string): Promise<TaskResponseDTO> {
-    throw new Error("Method not implemented.");
+    const { description, isConclued, title } =
+      (await prismaClient.task.findFirst({ where: { id } })) as TaskResponseDTO;
+    const formatedTask: TaskResponseDTO = {
+      id,
+      description,
+      isConclued,
+      title,
+    };
+    return formatedTask;
   }
-  public async create(data: any): Promise<TaskResponseDTO> {
-    throw new Error("Method not implemented.");
+  public async create(data: TaskCreateDTO): Promise<TaskResponseDTO> {
+    const { title, description }: TaskCreateDTO = data;
+    const newTask = await prismaClient.task.create({
+      data: { title, description },
+    });
+    const response: TaskResponseDTO = {
+      id: newTask.id,
+      title: newTask.title,
+      description: newTask.description,
+      isConclued: newTask.isConclued,
+    };
+    return response;
   }
   public async update(data: any): Promise<TaskResponseDTO> {
-    throw new Error("Method not implemented.");
+    const { title, description, isConclued } = await prismaClient.task.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        title: data.title,
+      },
+    });
+    const response: TaskResponseDTO = {
+      id: data.id,
+      title,
+      description,
+      isConclued,
+    };
+    return response;
   }
   public async detele(id: string): Promise<TaskResponseDTO> {
-    throw new Error("Method not implemented.");
+    const { title, description, isConclued } = await prismaClient.task.delete({
+      where: { id },
+    });
+    const response: TaskResponseDTO = {
+      id,
+      title,
+      description,
+      isConclued,
+    };
+    return response;
   }
 }

@@ -1,5 +1,5 @@
-
-import { TaskResponseDTO } from "../types/TaskResponseDTO";
+import { TaskCreateDTO } from "../types/Task/TaskCreateDTO";
+import { TaskResponseDTO } from "../types/Task/TaskResponseDTO";
 
 export interface ITaskRepository {
   getAll(): Promise<TaskResponseDTO[]>;

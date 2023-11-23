@@ -1,4 +1,4 @@
-import { TaskResponseDTO } from "./TaskResponseDTO";
+import { TaskResponseDTO } from "./Task/TaskResponseDTO";
 
 export interface Response {
   success: boolean;
