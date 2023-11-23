@@ -5,7 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
-    "build": "tsup src"
+    "build": "tsup src",
+    "vercel-build": "npx prisma generate && tsup src"
   },
   "author": "Lucas Fernando",
   "license": "ISC",
