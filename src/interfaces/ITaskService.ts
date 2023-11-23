@@ -7,5 +7,5 @@ export interface ITaksService {
   getById(id: string): Promise<Response>;
   create(data: TaskCreateDTO): Promise<Response>;
   delete(id: string): Promise<Response>;
-  updatePartial(data: TaskRequestDTO): Promise<Response>;
+  update(id: string, data: TaskRequestDTO): Promise<Response>;
 }

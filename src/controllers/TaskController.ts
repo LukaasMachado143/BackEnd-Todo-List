@@ -41,14 +41,18 @@ export class TaskController {
     }
   }
 
-  async updatePartial(
-    request: FastifyRequest<{ Body: TaskRequestDTO }>,
+  async update(
+    request: FastifyRequest<
+      { Params: { id: string } },
+      { Body: TaskRequestDTO }
+    >,
     reply: FastifyReply
   ) {
     try {
       const service: ITaksService = new TaskService();
-      const updatedData: TaskRequestDTO = request.body;
-      const response: Response = await service.updatePartial(updatedData);
+      const updatedData = request.body as TaskRequestDTO;
+      const id: string = request.params.id;
+      const response: Response = await service.update(id, updatedData);
       reply.send(response);
     } catch (error) {
       console.log(error);

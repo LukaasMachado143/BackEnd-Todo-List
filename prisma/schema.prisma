@@ -15,9 +15,8 @@ model task {
   title       String
   description String
   isConclued  Boolean?  @default(false)
-  isDeleted   Boolean?  @default(false)
   createAt    DateTime? @default(now())
-  updateAt    DateTime? @default(now())
+  updateAt    DateTime?  @default(now()) 
 
   @@map("tasks")
 }

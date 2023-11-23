@@ -11,7 +11,7 @@ export const taskRoutes = async (fastify: FastifyInstance) => {
 
   fastify.post("/", controller.create);
 
-  fastify.patch("/:id", controller.updatePartial);
+  fastify.patch("/:id", controller.update);
 
   fastify.delete("/:id", controller.delete);
 };

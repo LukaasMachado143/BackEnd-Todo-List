@@ -40,21 +40,44 @@ export class TaskService implements ITaksService {
     return response;
   }
   public async delete(id: string): Promise<Response> {
-    const deteledTask: TaskResponseDTO = await this._repository.detele(id);
-    const response: Response = {
-      success: true,
-      message: "Deleted Successfully",
-      data: deteledTask,
+    let response: Response = {
+      success: false,
+      message: "",
     };
+    const foundedTask = await this._repository.getById(id);
+    if (!foundedTask) {
+      response.message = "Task not Found !";
+      return response;
+    }
+    const deteledTask: TaskResponseDTO = await this._repository.detele(id);
+    response.success = true;
+    response.message = "Deleted Successfully";
+    response.data = deteledTask;
     return response;
   }
-  public async updatePartial(data: TaskRequestDTO): Promise<Response> {
-    const updatedTask: TaskResponseDTO = await this._repository.update(data);
-    const response: Response = {
-      success: true,
-      message: "Updated Successfully",
-      data: updatedTask,
+  public async update(id: string, data: TaskRequestDTO): Promise<Response> {
+    let response: Response = {
+      success: false,
+      message: "",
     };
+    const foundedTask = await this._repository.getById(id);
+    if (!foundedTask) {
+      response.message = "Task not Found !";
+      return response;
+    }
+    let updatedData = {
+      updateAt: new Date().toISOString(),
+      title: data.title ?? foundedTask.title,
+      description: data.description ?? foundedTask.description,
+      isConclued: data.isConclued ?? foundedTask.isConclued,
+    };
+    const updatedTask: TaskResponseDTO = await this._repository.update(
+      id,
+      updatedData
+    );
+    response.success = true;
+    response.message = "Updated Successfully";
+    response.data = updatedTask;
     return response;
   }
 }
